@@ -1,5 +1,5 @@
 // --- CONFIG ---
-const START_DATE = "2025-04-05"; // ЗАМЕНИ ЭТО на дату вашего знакомства (YYYY-MM-DD)
+const START_DATE = "2025-04-05"; 
 const photos = [
     'images/photo1.jpg', 'images/photo2.jpg', 'images/photo3.jpg',
     'images/photo4.jpg', 'images/photo5.jpg', 'images/photo6.jpg',
@@ -71,3 +71,4 @@ yesBtn.addEventListener('click', () => {
     setInterval(updateTimer, 1000);
     updateTimer();
 });
+
