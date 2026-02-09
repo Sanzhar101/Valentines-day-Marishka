@@ -1,4 +1,4 @@
-// Список твоих фото. Добавь сюда имена файлов из папки images
+// Проверь, чтобы названия в папке images совпадали с этими
 const photos = [
     'images/photo1.jpg',
     'images/photo2.jpg',
@@ -7,46 +7,45 @@ const photos = [
     'images/photo5.jpg'
 ];
 
+const photoStream = document.getElementById('photoStream');
+const music = document.getElementById('bgMusic');
+
 function createFallingPhoto() {
-    const container = document.getElementById('photoStream');
-    if (!container) return;
+    // Максимум 12 фото одновременно, чтобы было качественно и не в кучу
+    if (photoStream.children.length > 12) return;
 
     const img = document.createElement('img');
-    // Выбираем случайное фото из списка
     img.src = photos[Math.floor(Math.random() * photos.length)];
     img.classList.add('falling-photo');
 
-    // Случайная позиция по горизонтали
-    img.style.left = Math.random() * 100 + 'vw';
+    // Горизонтальная позиция
+    img.style.left = Math.random() * 85 + 'vw';
     
-    // Случайная скорость падения
-    const duration = Math.random() * 10 + 10; // от 10 до 20 секунд
+    // Скорость падения (7-12 секунд — плавно и красиво)
+    const duration = Math.random() * 5 + 7;
     img.style.animationDuration = duration + 's';
     
-    // Случайный размер для эффекта глубины
-    const size = Math.random() * 100 + 100; // от 100 до 200px
-    img.style.width = size + 'px';
-    img.style.height = 'auto';
+    // Случайный размер
+    img.style.width = Math.random() * 60 + 140 + 'px';
 
-    container.appendChild(img);
+    photoStream.appendChild(img);
 
-    // Удаляем фото после завершения анимации, чтобы не перегружать память
+    // Очистка памяти
     setTimeout(() => {
         img.remove();
     }, duration * 1000);
 }
 
-// Создаем новые фото каждые 1.5 секунды
-setInterval(createFallingPhoto, 1500);
+// Запуск медленного потока фото сразу
+setInterval(createFallingPhoto, 2500);
 
-// Логика кнопок
 const noBtn = document.getElementById('noBtn');
 const yesBtn = document.getElementById('yesBtn');
 const contentBox = document.querySelector('.content-box');
 const successMessage = document.getElementById('successMessage');
 
+// Убегающая кнопка
 noBtn.addEventListener('mouseover', () => {
-    // Кнопка бегает только внутри экрана
     const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
     const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
     
@@ -55,10 +54,24 @@ noBtn.addEventListener('mouseover', () => {
     noBtn.style.top = y + 'px';
 });
 
+// Нажатие "YES"
 yesBtn.addEventListener('click', () => {
     contentBox.classList.add('hidden');
     successMessage.classList.remove('hidden');
     
-    // Увеличиваем интенсивность появления фото в конце
-    setInterval(createFallingPhoto, 200);
+    // Включаем музыку
+    if (music) {
+        music.volume = 0.5; // Громкость 50%
+        music.play().catch(err => console.log("Music play blocked", err));
+    }
+
+    // Ускоряем поток фото в 5 раз для эффекта праздника!
+    setInterval(createFallingPhoto, 500);
 });
+
+// Резервный запуск музыки при первом клике (если YES не нажата сразу)
+document.addEventListener('click', () => {
+    if (music.paused && !successMessage.classList.contains('hidden')) {
+        music.play();
+    }
+}, { once: true });
