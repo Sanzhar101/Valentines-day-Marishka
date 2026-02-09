@@ -3,7 +3,7 @@
     --card-bg: rgba(12, 12, 12, 0.95);
     --accent-pink: #ff2e63;
     --text-light: #ffffff;
-    --font-heading: 'Syne', sans-serif;
+    --font-heading: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
 }
 
@@ -24,7 +24,7 @@ body, html {
 
 .photo-bg-stream { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
 
-/* Polaroid Effect */
+/* Polaroid Style */
 .falling-photo {
     position: absolute;
     width: 170px;
@@ -47,70 +47,78 @@ body, html {
 .main-card {
     position: relative; z-index: 10;
     background: var(--card-bg);
-    padding: 3.5rem 2rem;
-    border-radius: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 3rem 2rem;
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(25px);
     text-align: center;
-    max-width: 400px; width: 85%;
+    max-width: 380px; width: 85%;
     box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-    transition: transform 0.1s ease-out; /* Для микро-движения за мышкой */
 }
 
 .title {
     font-family: var(--font-heading);
-    font-size: 2.8rem;
-    line-height: 1;
-    margin-bottom: 2.5rem;
-    text-transform: uppercase;
-    letter-spacing: -2px;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    letter-spacing: -1px;
 }
 
 .btn-group { display: flex; justify-content: center; gap: 15px; min-height: 60px; }
 
 .btn {
-    padding: 16px 36px;
-    font-size: 0.9rem;
-    border-radius: 100px;
+    padding: 14px 32px;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    border-radius: 16px; /* Чуть менее круглые, более современные */
     border: none;
     cursor: pointer;
-    font-weight: 800;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.3s ease;
     -webkit-tap-highlight-color: transparent;
 }
 
 .yes { background: var(--text-light); color: var(--bg-dark); }
-.yes:hover { background: var(--accent-pink); color: white; transform: scale(1.1); }
+.yes:hover { background: var(--accent-pink); color: white; transform: scale(1.05); }
 
-.no { background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.3); }
+.no { background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.4); }
 
 .hidden { display: none; }
 
 #love-counter {
     margin-top: 2rem;
-    padding: 1.5rem;
+    padding: 1.2rem;
     background: rgba(255, 255, 255, 0.03);
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-#love-counter p { font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 0.5rem; opacity: 0.6; }
+#love-counter p { 
+    font-size: 0.75rem; 
+    font-weight: 700;
+    letter-spacing: 1px; 
+    margin-bottom: 0.8rem; 
+    opacity: 0.5;
+    text-transform: uppercase;
+}
 
 #timer {
     font-family: var(--font-heading);
     color: var(--accent-pink);
-    font-size: 1.1rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0px; /* Здесь теперь всё читается отлично */
 }
 
 .romantic-text { 
     font-family: var(--font-heading); 
     font-size: 1.8rem; 
-    text-transform: uppercase;
+    font-weight: 700;
     color: var(--accent-pink); 
 }
 
-.final-heart { font-size: 4rem; animation: heartbeat 1s infinite; margin-top: 1rem; }
+.final-heart { font-size: 3.5rem; animation: heartbeat 1s infinite; margin-top: 1rem; }
 
-@keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
