@@ -39,7 +39,6 @@ body, html {
     z-index: 0;
 }
 
-/* Улучшенные падающие фото */
 .falling-photo {
     position: absolute;
     width: 180px;
@@ -50,14 +49,14 @@ body, html {
     border: 2px solid rgba(255, 46, 99, 0.3);
     pointer-events: none;
     animation: fall linear forwards;
-    opacity: 0; /* Начальная прозрачность */
+    opacity: 0;
 }
 
 @keyframes fall {
     0% { transform: translateY(-200px) rotate(-10deg); opacity: 0; }
-    15% { opacity: 0.7; } /* Плавное проявление */
+    15% { opacity: 0.7; }
     85% { opacity: 0.7; }
-    100% { transform: translateY(110vh) rotate(10deg); opacity: 0; } /* Плавное исчезновение */
+    100% { transform: translateY(110vh) rotate(10deg); opacity: 0; }
 }
 
 .main-card {
@@ -97,6 +96,7 @@ body, html {
     cursor: pointer;
     font-weight: 600;
     transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-tap-highlight-color: transparent; /* Фикс для iPhone */
 }
 
 .yes {
@@ -112,6 +112,7 @@ body, html {
 .no {
     background: #222;
     color: #666;
+    outline: none;
 }
 
 .hidden { display: none; }
