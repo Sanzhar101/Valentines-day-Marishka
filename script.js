@@ -1,5 +1,5 @@
 // --- CONFIG ---
-const START_DATE = "2025-04-05"; 
+const START_DATE = "2025-04-05"; // ЗАМЕНИ ЭТО на дату вашего знакомства (YYYY-MM-DD)
 const photos = [
     'images/photo1.jpg', 'images/photo2.jpg', 'images/photo3.jpg',
     'images/photo4.jpg', 'images/photo5.jpg', 'images/photo6.jpg',
@@ -26,6 +26,7 @@ function updateTimer() {
     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((diff / (1000 * 60)) % 60);
     const seconds = Math.floor((diff / 1000) % 60);
+    // Формат: 00D 00H 00M 00S
     timerDisplay.innerHTML = `${days}D ${hours}H ${minutes}M ${seconds}S`;
 }
 
@@ -43,7 +44,7 @@ function createFallingPhoto() {
 }
 setInterval(createFallingPhoto, 2500);
 
-// 4. Убегающая кнопка (iPhone + PC)
+// 4. Убегающая кнопка
 function moveButton(e) {
     if (e) e.preventDefault();
     const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 40);
@@ -59,19 +60,14 @@ noBtn.addEventListener('touchstart', moveButton);
 yesBtn.addEventListener('click', () => {
     contentBox.classList.add('hidden');
     successMessage.classList.remove('hidden');
-    if (music) { music.volume = 0.4; music.play().catch(() => {}); }
+    if (music) { 
+        music.volume = 0.4; 
+        music.play().catch(() => {
+            // Резервный запуск при клике, если браузер заблочил
+            document.addEventListener('click', () => music.play(), { once: true });
+        }); 
+    }
     setInterval(createFallingPhoto, 500);
     setInterval(updateTimer, 1000);
     updateTimer();
 });
-
-// 6. Микро-движение карточки за мышкой (только PC)
-document.addEventListener('mousemove', (e) => {
-    if (window.innerWidth > 768) {
-        const moveX = (e.clientX - window.innerWidth / 2) / 40;
-        const moveY = (e.clientY - window.innerHeight / 2) / 40;
-        document.querySelector('.main-card').style.transform = `rotateX(${-moveY}deg) rotateY(${moveX}deg)`;
-    }
-});
-
-
