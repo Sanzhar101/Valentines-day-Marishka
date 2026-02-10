@@ -16,7 +16,7 @@ const timerDisplay = document.getElementById('timer');
 
 // 1. Смена заголовка вкладки
 let originalTitle = document.title;
-window.addEventListener('blur', () => { document.title = "I miss you... ❤️"; });
+window.addEventListener('blur', () => { document.title = "Come back... ❤️"; });
 window.addEventListener('focus', () => { document.title = originalTitle; });
 
 // 2. Счетчик времени
@@ -71,4 +71,5 @@ yesBtn.addEventListener('click', () => {
     setInterval(updateTimer, 1000);
     updateTimer();
 });
+
 
